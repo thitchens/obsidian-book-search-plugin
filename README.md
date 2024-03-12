@@ -226,8 +226,8 @@ Please find here a definition of the possible variables to be used in your templ
 | publishDate     | The year the book was published.                                                                                                                   |
 | isbn10          | ISBN10                                                                                                                                             |
 | isbn13          | ISBN13                                                                                                                                             |
-| rating          | The rating of the book |
-| totalRatings    | The total number of ratings on the book |
+| rating          | The rating of the book                                                                                                                             |
+| totalRatings    | The total number of ratings on the book                                                                                                            |
 
 <br>
 

@@ -55,7 +55,10 @@ export const DEFAULT_SETTINGS: BookSearchPluginSettings = {
 };
 
 export class BookSearchSettingTab extends PluginSettingTab {
-  constructor(app: App, private plugin: BookSearchPlugin) {
+  constructor(
+    app: App,
+    private plugin: BookSearchPlugin,
+  ) {
     super(app, plugin);
   }
 

@@ -6,7 +6,10 @@ export class GoogleBooksApi implements BaseBooksApiImpl {
   private static readonly MAX_RESULTS = 40;
   private static readonly PRINT_TYPE = 'books';
 
-  constructor(private readonly localePreference: string, private readonly apiKey?: string) {}
+  constructor(
+    private readonly localePreference: string,
+    private readonly apiKey?: string,
+  ) {}
 
   private getLanguageRestriction(): string {
     return this.localePreference === 'default' ? window.moment.locale() : this.localePreference;
@@ -42,11 +45,14 @@ export class GoogleBooksApi implements BaseBooksApiImpl {
   }
 
   private getISBN(industryIdentifiers: VolumeInfo['industryIdentifiers']) {
-    return industryIdentifiers?.reduce((result, item) => {
-      const isbnType = item.type === 'ISBN_10' ? 'isbn10' : 'isbn13';
-      result[isbnType] = item.identifier.trim();
-      return result;
-    }, {} as Record<string, string>);
+    return industryIdentifiers?.reduce(
+      (result, item) => {
+        const isbnType = item.type === 'ISBN_10' ? 'isbn10' : 'isbn13';
+        result[isbnType] = item.identifier.trim();
+        return result;
+      },
+      {} as Record<string, string>,
+    );
   }
 
   private extractBasicBookInfo(item: VolumeInfo): Partial<Book> {
@@ -65,8 +71,8 @@ export class GoogleBooksApi implements BaseBooksApiImpl {
       description: item.description,
       link: item.canonicalVolumeLink || item.infoLink,
       previewLink: item.previewLink,
-	  rating: item.averageRating,
-	  totalRatings: item.ratingsCount,
+      rating: item.averageRating,
+      totalRatings: item.ratingsCount,
     };
   }
 
@@ -86,8 +92,8 @@ export class GoogleBooksApi implements BaseBooksApiImpl {
       description: '',
       link: '',
       previewLink: '',
-	  rating: '',
-	  totalRatings: '',
+      rating: '',
+      totalRatings: '',
       ...this.extractBasicBookInfo(item),
       ...this.getISBN(item.industryIdentifiers),
     };
