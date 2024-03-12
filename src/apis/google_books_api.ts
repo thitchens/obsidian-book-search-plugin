@@ -65,6 +65,8 @@ export class GoogleBooksApi implements BaseBooksApiImpl {
       description: item.description,
       link: item.canonicalVolumeLink || item.infoLink,
       previewLink: item.previewLink,
+	  rating: item.averageRating,
+	  totalRatings: item.ratingsCount,
     };
   }
 
@@ -84,6 +86,8 @@ export class GoogleBooksApi implements BaseBooksApiImpl {
       description: '',
       link: '',
       previewLink: '',
+	  rating: '',
+	  totalRatings: '',
       ...this.extractBasicBookInfo(item),
       ...this.getISBN(item.industryIdentifiers),
     };

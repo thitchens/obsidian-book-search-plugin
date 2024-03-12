@@ -28,4 +28,6 @@ export interface Book {
   link?: string;
   description?: string;
   previewLink?: string;
+  rating?: number | string;
+  totalRatings?: number | string;
 }
