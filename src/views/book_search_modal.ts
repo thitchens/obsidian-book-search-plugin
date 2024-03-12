@@ -2,8 +2,7 @@ import { ButtonComponent, Modal, Setting, TextComponent, Notice } from 'obsidian
 import { Book } from '@models/book.model';
 import { BaseBooksApiImpl, factoryServiceProvider } from '@apis/base_api';
 import BookSearchPlugin from '@src/main';
-import { BookSearchPluginSettings, DEFAULT_SETTINGS } from '@settings/settings';
-import { ServiceProvider } from '@src/constants';
+import { BookSearchPluginSettings } from '@settings/settings';
 
 export class BookSearchModal extends Modal {
   private settings: BookSearchPluginSettings;
@@ -69,23 +68,8 @@ export class BookSearchModal extends Modal {
 
   onOpen(): void {
     this.renderHeader();
-    this.renderSelectLocale();
     this.renderSearchInput();
     this.renderSearchButton();
-  }
-
-  renderSelectLocale() {
-    if (this.settings.serviceProvider !== ServiceProvider.google) return;
-
-    const defaultLocale = window.moment.locale();
-    const locales = window.moment.locales().filter(locale => locale !== defaultLocale);
-    new Setting(this.contentEl).setName('Locale').addDropdown(dropdown => {
-      dropdown.addOption(defaultLocale, defaultLocale);
-      locales.forEach(locale => dropdown.addOption(locale, locale));
-      const localeValue = this.settings.localePreference || DEFAULT_SETTINGS.localePreference;
-      dropdown.setValue(localeValue === DEFAULT_SETTINGS.localePreference ? defaultLocale : localeValue);
-      dropdown.onChange(locale => (this.options.locale = locale));
-    });
   }
 
   private renderHeader(): void {
